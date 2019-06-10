@@ -72,7 +72,9 @@ $( document ).ready(function() {
                 if (reservation < firstDay) continue;
 
                 // Populate nomadsDict
-                var key = item.summary;
+                // Remove mention of chosen desk via split
+                var key = item.summary.split(' (')[0];
+
                 var reservations = nomadsDict[key];
                 if (reservations != null) {
                     reservations.push(reservation);
