@@ -1,0 +1,29 @@
+{
+  "name": "nomadlink",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "lint": "eslint app.js config.js",
+    "test": "npm run lint"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "debug": "~3.1.0",
+    "errorhandler": "~1.5.0",
+    "express": "~4.16.1",
+    "method-override": "~2.3.10",
+    "morgan": "~1.9.0",
+    "pug": "^2.0.0-alpha6",
+    "serve-favicon": "~2.4.5",
+    "express-minify": "~1.0.0",
+    "less-middleware": "~3.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0"
+  }
+}

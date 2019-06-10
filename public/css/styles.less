@@ -1,0 +1,205 @@
+// Color variables
+@darkGray: #1F1F1F;
+@gray: #888888; 
+@green: #4fd37e; 
+@pearl: #f1f3f9; 
+@lightGray: #afafaf; 
+
+// Width variables 
+@widthWide: 1260px; 
+@widthRegular: 980px;
+
+@fontTitle: 'Helvetica';
+@fontContent: 'Helvetica';
+
+@import "reset.css";
+@import "common.css";
+
+html {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: @fontContent, sans-serif;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: @fontContent, sans-serif;
+}
+
+h1, h2, h3, h4, h5, p, a, span {
+  font-family: @fontContent, sans-serif;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h4{
+  font-size: 14px;
+  text-transform: uppercase;
+  padding-bottom:20px;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.container {
+  max-width: @widthRegular;
+  margin: auto;
+  padding: 0 20px;
+}
+
+header {
+  padding: 0px 20px 0;
+  margin: 0;
+  .container {
+    margin-bottom: 0px;
+  }
+}
+
+.logo {
+  text-align: center;
+  margin: 40px 0 30px;
+  img {
+    max-width: 100px;
+    margin: auto;
+  }
+  .title {
+    display: block;
+    font-family: @fontTitle, cursive;
+    font-weight: 50;
+    font-size: 54px;
+    line-height: 20px;
+    color: #333;
+    margin: 40px 0 0px;
+  }
+}
+
+select#month {
+  float:right;
+}
+
+table#reservations {
+  width:100%;
+
+  td {
+    padding:6px 8px;
+  }
+
+  tr:nth-child(odd){
+    font-weight: bold;
+    background: #FAFAFA;
+    color:#333;
+  }
+  tr:nth-child(even){
+    color:#888;
+  }
+}
+
+div.clear {
+  clear: both;
+}
+
+footer {
+  max-width: @widthRegular;
+  margin: auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  padding: 40px 20px;
+  border-top: 3px solid @pearl;
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: normal;
+    color: @lightGray;
+    line-height: 13px;
+    letter-spacing: 0.3;
+    text-transform: uppercase;
+  }
+  a {
+    margin: 0;
+    font-size: 13px;
+    font-weight: normal;
+    color: @lightGray;
+    line-height: 13px;
+    letter-spacing: 0.3;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .footer-nav {
+  ul {
+    list-style: none;
+    margin: 0;
+    li {
+      display: inline-block;
+      margin: 0 20px 0 0;
+    }
+  }
+}
+}
+
+
+@media (max-width: 500px) {
+  header {
+    display: block;
+    text-align: center;
+  }
+  .logo {
+    margin-bottom: 20px;
+  }
+  .logo-text {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 659px) {
+  
+  header {
+    padding: 16px 16px 0;
+    .container {
+      padding: 0px;
+    }
+  }
+  .logo {
+    img {
+      max-width: 58px;
+    }
+    .title {
+      font-size: 34px;
+      margin: 20px 0 0;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+
+  footer {
+    display: block;
+    text-align: center;
+  }
+  .footer-nav {
+    ul {
+      display: block;
+      margin-bottom: 20px;
+      li {
+        display: block;
+        margin: 0 0 10px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  .container, footer {
+    max-width: @widthWide;
+  }
+}
