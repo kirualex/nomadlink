@@ -2,7 +2,7 @@
 @darkGray: #1F1F1F;
 @gray: #888888; 
 @green: #4fd37e; 
-@pearl: #f1f3f9; 
+@pearl: #f4f7fD; 
 @lightGray: #afafaf; 
 
 // Width variables 
@@ -27,6 +27,7 @@ body {
 
 h1, h2, h3, h4, h5, p, a, span {
   font-family: @fontContent, sans-serif;
+  padding-left: 12px;
 }
 
 h1 {
@@ -78,6 +79,8 @@ header {
 
 select#month {
   float:right;
+  font-size: 24px;
+  margin-right: 12px;
 }
 
 table#reservations {
@@ -89,11 +92,11 @@ table#reservations {
 
   tr:nth-child(odd){
     font-weight: bold;
-    background: #FAFAFA;
-    color:#333;
+    background: @pearl;
+    color:@darkGray;
   }
   tr:nth-child(even){
-    color:#888;
+    color:@gray;
   }
 }
 
@@ -193,5 +196,21 @@ footer {
         margin: 0 0 10px;
       }
     }
+  }
+}
+
+@media print {
+  .logo {
+    display:none;
+  }
+  table#reservations {
+    width:100%;
+
+    td {
+      padding:2px 4px;
+    }
+  }
+  footer {
+    display:none;
   }
 }

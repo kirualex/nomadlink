@@ -39,6 +39,7 @@ $( document ).ready(function() {
 
     function getReservationsFor(month) {
 
+        var nomadsArray = new Array();
         countLabel.text('Loading...');
         table.empty();
 
@@ -50,15 +51,12 @@ $( document ).ready(function() {
         $.ajax({
         url:"https://www.googleapis.com/calendar/v3/calendars/" + cal_id + "/events?orderBy=updated&key=" + api_key+ "&timeMin="+timeMin+"&timeMax="+timeMax,
         success: function(data) {
-            console.log(data);
 
             var sortedItems = data.items.sort(function(a, b) {
                 var eventA = getDateOfItem(a);
                 var eventB = getDateOfItem(b);
                 return eventA.getDate() < eventB.getDate();
             })
-
-            var nomadsDict = {};
 
             var count = 0;
             for (index in sortedItems) {
@@ -73,25 +71,32 @@ $( document ).ready(function() {
 
                 // Populate nomadsDict
                 // Remove mention of chosen desk via split
-                var key = item.summary.split(' (')[0];
 
-                var reservations = nomadsDict[key];
-                if (reservations != null) {
-                    reservations.push(reservation);
-                } else {
-                    nomadsDict[key] = new Array();
-                    nomadsDict[key].push(reservation);
+                var name = item.summary.split(' (')[0];
+                var found = nomadsArray.find(function(nomad) {
+                    if(nomad.name == name) {
+                         nomad.reservations.push(reservation);
+                        return true;
+                    }
+                    return false;
+                });
+
+                if (!found){
+                    var nomad = {"name" : name, "reservations": [reservation]};
+                    nomadsArray.push(nomad);
                 }
-
                 count ++;
             }
 
             var dateOptions = { weekday: 'long', day: 'numeric' };
             var nomadCount = 0;
 
-            Object.entries(nomadsDict).forEach(([nomad, reservations]) => {
-                table.append("<tr><td class='nomad'>"+nomad+"</td><td>"+ reservations.length +"</td></tr>");
-                var dates = reservations.reverse().map(function(date) {
+            console.log(nomadsArray);
+            nomadsArray = nomadsArray.sort((a, b) => a.reservations.length < b.reservations.length);
+            nomadsArray.forEach( (nomad) => {
+
+                table.append("<tr><td class='nomad'>"+nomad.name+"</td><td>"+ nomad.reservations.length +"</td></tr>");
+                var dates = nomad.reservations.reverse().map(function(date) {
                     return date.toLocaleDateString('fr-FR', dateOptions);
                 });
                 table.append("<tr><td colspan='2'>"+dates.join(", ")+"</td></tr>");
