@@ -1,5 +1,4 @@
 const request = require("request");
-
 const cal_id = process.env.CALENDAR_ID;
 const api_key = process.env.API_KEY;
 
