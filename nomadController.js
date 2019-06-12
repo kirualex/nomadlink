@@ -1,6 +1,6 @@
 const request = require("request");
 
-const cal_id = "dg601thskc03amhtlmr8lb541k@group.calendar.google.com";
+const cal_id = process.env.CALENDAR_ID;
 const api_key = "AIzaSyCg0rx4GDvIYWPNU7QdRtMwXQpAumSR8hg";
 
 String.prototype.capitalize = function() {
