@@ -18,7 +18,6 @@ module.exports = function () {
     this.getReservations = function(month, callback){        
 
         var nomadsArray = new Array();
-
         var firstDay = new Date(month.getFullYear(), month.getMonth(), 1);
         var lastDay = new Date(month.getFullYear(), month.getMonth() + 1, 0);
         var timeMin = encodeURIComponent(firstDay.toISOString())
