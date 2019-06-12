@@ -1,4 +1,6 @@
 const request = require("request");
+const moment = require('moment');
+
 const cal_id = process.env.CALENDAR_ID;
 const api_key = process.env.API_KEY;
 
@@ -15,6 +17,8 @@ module.exports = function () {
     }
 
     this.getReservations = function(month, callback){        
+
+        moment.locale('fr');
 
         var nomadsArray = new Array();
         var firstDay = new Date(month.getFullYear(), month.getMonth(), 1);
@@ -69,7 +73,7 @@ module.exports = function () {
             var finalArray = [];
             nomadsArray.forEach( (nomad) => {
                 var dates = nomad.reservations.reverse().map(function(date) {
-                    return date.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric' }).capitalize();
+                    return moment(date).format("dddd Do").capitalize();
                 });
                 finalArray.push({"name" : nomad.name, "reservations" : dates.join(", "), "count" : nomad.reservations.length})
             });
