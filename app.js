@@ -4,15 +4,15 @@
  * Module dependencies.
  */
 const app = require('./config');
-const PORT = app.get('port');
+const dotenv = require('dotenv').config();
 
 function render404(req, res) {
       res.status(404);
       res.render('404');
 }
 
-app.listen(PORT, () => {
-    process.stdout.write(`Point your browser to: http://localhost:${PORT}\n`);
+app.listen(process.env.PORT, () => {
+    process.stdout.write(`Point your browser to: http://localhost:${process.env.PORT}\n`);
 });
 
 /*

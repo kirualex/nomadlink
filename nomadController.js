@@ -1,7 +1,7 @@
 const request = require("request");
 
 const cal_id = process.env.CALENDAR_ID;
-const api_key = "AIzaSyCg0rx4GDvIYWPNU7QdRtMwXQpAumSR8hg";
+const api_key = process.env.API_KEY;
 
 String.prototype.capitalize = function() {
   return this.charAt(0).toUpperCase() + this.slice(1)
