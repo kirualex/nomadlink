@@ -10,7 +10,7 @@ block body
         option -
         for tuple in months
             - var monthValue =  tuple.month.getMonth()+"-"+tuple.month.getFullYear()
-            - var monthDisplay =  tuple.month.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' })
+            - var monthDisplay =  tuple.month.toLocaleDateString('fr', { year: 'numeric', month: 'long' })
             option(value=monthValue selected=tuple.selected)
                 != monthDisplay
 
