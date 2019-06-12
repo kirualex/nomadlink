@@ -9,7 +9,6 @@ var express = require('express'),
   errorHandler = require('errorhandler'),
   path = require('path'),
   lessMiddleware = require('less-middleware'),
-  googleAgenda = require('./GoogleAgenda.js'),
   minify = require('express-minify');
   
 module.exports = function() {
@@ -25,8 +24,6 @@ module.exports = function() {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(errorHandler());
-
-  // app.use(googleAgenda);
   
   app.use(lessMiddleware(__dirname + '/public', {force: true, compress: true, optimization: 2}));
   app.use(minify());

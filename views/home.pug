@@ -1,12 +1,29 @@
 extends ./layout.pug
 
 block body
+
   div.container
     
     h1 Réservations Nomades
 
     select#month
+        option -
+        for tuple in months
+            - var monthValue =  tuple.month.getMonth()+"-"+tuple.month.getFullYear()
+            - var monthDisplay =  tuple.month.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' })
+            option(value=monthValue selected=tuple.selected)
+                != monthDisplay
 
     h4#count
+         != data.nbDays + " réservations faites par " + data.nomads.length + " nomades"
 
     table#reservations
+         for nomad in data.nomads
+             tr
+                 td
+                     != nomad.name
+                 td
+                     != nomad.count
+             tr
+                 td(colspan=2) 
+                     != nomad.reservations
