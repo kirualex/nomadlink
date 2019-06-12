@@ -19,7 +19,7 @@ app.listen(PORT, () => {
  * -------------- Routes --------------
  */
 
-const MAX_MONTH = 6;
+const MAX_MONTH = 12;
 var nomadController = require('./nomadController');
 var api = new nomadController();
 
