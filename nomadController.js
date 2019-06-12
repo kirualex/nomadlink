@@ -70,7 +70,7 @@ module.exports = function () {
             var finalArray = [];
             nomadsArray.forEach( (nomad) => {
                 var dates = nomad.reservations.reverse().map(function(date) {
-                    return date.toLocaleDateString('fr', { weekday: 'long', day: 'numeric' }).capitalize();
+                    return date.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric' }).capitalize();
                 });
                 finalArray.push({"name" : nomad.name, "reservations" : dates.join(", "), "count" : nomad.reservations.length})
             });
