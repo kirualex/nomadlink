@@ -28,6 +28,8 @@ module.exports = function () {
 
         const url = "https://www.googleapis.com/calendar/v3/calendars/" + cal_id 
         + "/events?orderBy=updated&key=" + api_key
+        + "&showDeleted=" + false
+        + "&singleEvents=" + true
         + "&timeMin="+timeMin
         + "&timeMax="+timeMax;
 
