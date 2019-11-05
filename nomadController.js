@@ -62,7 +62,7 @@ module.exports = function () {
                 let item = data.items[index];
 
                 // Only consider items with 'confirmed' status
-                if (item.status != 'confirmed') continue;
+                if (item.status != 'confirmed' && item.status != 'tentative') continue;
 
                 // Allow reservations spanning multiple days
                 var nbDays = getNumberOfDaysOfItem(firstDay, lastDay, item);
