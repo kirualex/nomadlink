@@ -31,6 +31,24 @@ module.exports = function () {
         return new Date(date);
     }
 
+    this.getStatistics = function(month, callback){   
+        var fromDate = moment(month);
+        var labels = [];
+        var data = [];
+        var nbMonths = 12;
+        for (var i=0; i<nbMonths; i++) {
+            var prevMoment = fromDate.subtract(1, 'months')
+            var month = prevMoment.toDate()
+            this.getReservations(month, function(reservations) {
+                labels.push(month);
+                data.push(reservations["nbDays"]);
+                if (data.length == 12) {
+                    callback({"labels": labels, "data": data})
+                }
+            });
+        }      
+    }
+
     this.getReservations = function(month, callback){        
 
         moment.locale('fr');
@@ -72,16 +90,21 @@ module.exports = function () {
                     var reservation = getStartDateOfItem(item);
                     reservation.setDate(reservation.getDate() + i);
 
+                    // Handle undefined summary
+                    if (item.summary == undefined) {
+                        break;
+                    }
+
                     // Populate nomadsDict
                     // Remove mention of chosen desk via split
                     var name = item.summary.split(' (')[0];
                     var found = nomadsArray.find(function(nomad) {
                         if(nomad.name == name) {
-                             nomad.reservations.push(reservation);
-                            return true;
-                        }
-                        return false;
-                    });
+                           nomad.reservations.push(reservation);
+                           return true;
+                       }
+                       return false;
+                   });
 
                     if (!found){
                         var nomad = {"name" : name, "reservations": [reservation]};
@@ -105,7 +128,7 @@ module.exports = function () {
             });
 
             var finalData = {"nbDays" : count,
-                             "nomads": finalArray}
+            "nomads": finalArray}
 
             callback(finalData);
         });

@@ -13,6 +13,8 @@ block body
             option(value=monthValue selected=tuple.selected)
                 != monthDisplay
 
+    canvas#myChart
+
     h4#count
          != data.nbDays + " réservations faites par " + data.nomads.length + " nomades"
 

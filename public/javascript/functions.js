@@ -1,5 +1,5 @@
 // On document load
-$( document ).ready(function() {
+$(document).ready(function() {
 
     var monthSelector = $("select#month");
     var table = $("table#reservations");
@@ -11,4 +11,5 @@ $( document ).ready(function() {
         countLabel.text("Loading...");
         window.location.href = "/month/" + monthSelector.val();
     });
+
 });

@@ -48,9 +48,13 @@ app.route('/month/:month').get(function(req, res) {
         months.push({"month" : month, "selected" : selected});
     }
 
-    api.getReservations(selectedDate, function(data) {
-        res.render('home', {"data" : data, "months":months});
+    api.getStatistics(selectedDate, function(stats) {
+         
+        api.getReservations(selectedDate, function(data) {
+            res.render('home', {"data" : data, "months" : months, "stats" : stats});
+        });
     });
+    
 });
 
 // Route that catches any other url and renders the 404 page
