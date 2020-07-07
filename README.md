@@ -1,6 +1,6 @@
 ## Nomadlink
 
-Source for Happy Hours [Nomadlink](nomadlink.herokuapp.com) interface
+Source for Happy Hours [Nomadlink](https://nomadlink.herokuapp.com) interface
 
 #### Getting started
 
