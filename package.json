@@ -21,7 +21,7 @@
     "pug": "^2.0.0-alpha6",
     "serve-favicon": "~2.4.5",
     "moment": "2.24.0",
-    "lodash": ">=4.17.13"
+    "lodash": ">=4.17.21"
   },
   "repository": {
     "type": "git",
