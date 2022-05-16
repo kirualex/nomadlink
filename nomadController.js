@@ -35,8 +35,8 @@ module.exports = function () {
         var fromDate = moment(month);
         var labels = [];
         var data = [];
-        var nbMonths = 12;
-        for (var i=0; i<nbMonths; i++) {
+        var nbMonths = 13;
+        for (var i=-1; i<nbMonths; i++) {
             var prevMoment = fromDate.subtract(1, 'months')
             var month = prevMoment.toDate()
             this.getReservations(month, function(reservations) {
