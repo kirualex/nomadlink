@@ -1,5 +1,5 @@
 const request = require("request");
-const moment = require('moment');
+const moment = require('moment-timezone');
 
 const cal_id = process.env.CALENDAR_ID;
 const api_key = process.env.API_KEY;
@@ -22,32 +22,17 @@ module.exports = function () {
     function getStartDateOfItem(item) {
         var start =  item.start || item.originalStartTime;
         var date =  start.date || start.dateTime;
-        return new Date(date);
+        var start = new Date(date);
+        return moment(start).utc();
     }
 
     function getEndDateOfItem(item) {
         var end =  item.end;
         var date =  end.date || end.dateTime;
-        return new Date(date);
+        var end = new Date(date);
+        return moment(end).utc();
     }
 
-    this.getStatistics = function(month, callback){   
-        var fromDate = moment(month);
-        var labels = [];
-        var data = [];
-        var nbMonths = 13;
-        for (var i=-1; i<nbMonths; i++) {
-            var prevMoment = fromDate.subtract(1, 'months')
-            var month = prevMoment.toDate()
-            this.getReservations(month, function(reservations) {
-                labels.push(month);
-                data.push(reservations["nbDays"]);
-                if (data.length == 12) {
-                    callback({"labels": labels, "data": data})
-                }
-            });
-        }      
-    }
 
     this.getReservations = function(month, callback){        
 
@@ -55,9 +40,9 @@ module.exports = function () {
 
         var nomadsArray = new Array();
         var firstDay = new Date(month.getFullYear(), month.getMonth(), 1);
-        var lastDay = new Date(month.getFullYear(), month.getMonth() + 1, 1);
-        var timeMin = encodeURIComponent(firstDay.toISOString())
-        var timeMax = encodeURIComponent(lastDay.toISOString())
+        var lastDay = new Date(month.getFullYear(), month.getMonth() + 1, -1);
+        var timeMin = encodeURIComponent(moment(firstDay).utc().toISOString())
+        var timeMax = encodeURIComponent(moment(lastDay).utc().toISOString())
 
         const url = "https://www.googleapis.com/calendar/v3/calendars/" + cal_id 
         + "/events?orderBy=updated&key=" + api_key
@@ -69,11 +54,18 @@ module.exports = function () {
         request.get(url, (error, response, body) => {
             var data = JSON.parse(body);
 
+            if (data["error"]) {
+                callback({ "error" : data["error"]["message"] });
+                return
+            }
+
             var sortedItems = data.items.sort(function(a, b) {
                 var eventA = getStartDateOfItem(a);
                 var eventB = getStartDateOfItem(b);
-                return eventB.getDate() - eventA.getDate();
+                return eventB - eventA;
             })
+
+            console.log(sortedItems)
 
             var count = 0;
             for (index in sortedItems) {
@@ -88,8 +80,7 @@ module.exports = function () {
                 // Reverse addition of multiple-day reservations
                 for (var i=nbDays-1; i>=0; i--) {
                     var reservation = getStartDateOfItem(item);
-                    reservation.setDate(reservation.getDate() + i);
-
+                    reservation.add(i, 'd')
                     // Handle undefined summary
                     if (item.summary == undefined) {
                         break;
@@ -118,7 +109,7 @@ module.exports = function () {
             var finalArray = [];
             nomadsArray.forEach( (nomad) => {
                 var dates = nomad.reservations.reverse().map(function(date) {
-                    return moment(date).format("dddd Do").capitalize();
+                    return moment(date).utc().format("dddd Do").capitalize();
                 });
                 finalArray.push({"name" : nomad.name, "reservations" : dates.join(", "), "count" : nomad.reservations.length})
             });

@@ -4,6 +4,8 @@
  * Module dependencies.
  */
 const app = require('./config');
+const PORT = process.env.PORT || 3000;
+
 app.locals.moment = require('moment');
 const dotenv = require('dotenv').config();
 
@@ -14,8 +16,8 @@ function render404(req, res) {
 
 app.locals.moment = require('moment');
 
-app.listen(process.env.PORT, () => {
-    process.stdout.write(`Point your browser to: http://localhost:${process.env.PORT}\n`);
+app.listen(PORT, () => {
+    process.stdout.write(`Point your browser to: http://localhost:${PORT}\n`);
 });
 
 /*
@@ -42,17 +44,14 @@ app.route('/month/:month').get(function(req, res) {
     var selectedDate = new Date(dateArr[1], dateArr[0], 1);
 
     var months = [];
-    for (var i=0; i<MAX_MONTH; i++) {
+    for (var i=-1; i<MAX_MONTH; i++) {
         let month = new Date(today.getFullYear(), today.getMonth() - i, 1);
         var selected = (selectedDate.getFullYear() == month.getFullYear()) && (selectedDate.getMonth() == month.getMonth())
         months.push({"month" : month, "selected" : selected});
     }
 
-    api.getStatistics(selectedDate, function(stats) {
-         
-        api.getReservations(selectedDate, function(data) {
-            res.render('home', {"data" : data, "months" : months, "stats" : stats});
-        });
+    api.getReservations(selectedDate, function(data) {
+        res.render('home', {"data" : data, "months" : months});
     });
     
 });
