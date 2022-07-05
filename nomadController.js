@@ -40,9 +40,15 @@ module.exports = function () {
 
         var nomadsArray = new Array();
         var firstDay = new Date(month.getFullYear(), month.getMonth(), 1);
-        var lastDay = new Date(month.getFullYear(), month.getMonth() + 1, -1);
+        var lastDay = new Date(month.getFullYear(), month.getMonth() + 1, 1);
         var timeMin = encodeURIComponent(moment(firstDay).utc().toISOString())
         var timeMax = encodeURIComponent(moment(lastDay).utc().toISOString())
+
+        console.log(firstDay)
+        console.log(lastDay)
+        console.log(timeMin)
+        console.log(timeMax)
+
 
         const url = "https://www.googleapis.com/calendar/v3/calendars/" + cal_id 
         + "/events?orderBy=updated&key=" + api_key
