@@ -77,7 +77,9 @@ header {
   }
 }
 
+
 select#month {
+  margin-top: 2rem;
   float:right;
   font-size: 16px;
   margin-right: 12px;
@@ -106,6 +108,52 @@ table#reservations {
 
 div.clear {
   clear: both;
+}
+
+#addReservationForm {
+  padding: 20px;
+  background-color: @pearl;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+#addReservationForm label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: @darkGray;
+}
+
+#addReservationForm .input-wrapper {
+  margin-right: 12px;
+  margin-bottom: 16px;
+}
+
+#addReservationForm input[type="text"],
+#addReservationForm input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid @lightGray;
+  border-radius: 4px;
+  font-size: 14px;
+  color: @darkGray;
+}
+
+#addReservationForm button[type="submit"] {
+  background-color: @green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#addReservationForm button[type="submit"]:hover {
+  background-color: darken(@green, 10%);
 }
 
 footer {
@@ -153,6 +201,7 @@ footer {
   }
 }
 }
+
 
 @media (max-width: 500px) {
   header {
@@ -218,3 +267,4 @@ footer {
     display:none;
   }
 }
+

@@ -6,9 +6,20 @@ block body
     h1 Réservations Nomades
 
     h2.error
-        != data.error
+        != data.error 
 
     unless data.error
+
+        h4 Ajouter une réservation
+        form#addReservationForm(action="/add-reservation" method="post")
+            div.input-wrapper
+                label(for="name") Nom
+                input#name(type="text" name="name" required)
+            div.input-wrapper
+                label(for="date") Date
+                input#date(type="date" name="date" value=data.nextDayFormatted required)
+            button(type="submit") Réserver
+
 
         select#month
             for tuple in months
@@ -32,3 +43,5 @@ block body
                  tr
                      td(colspan=2) 
                          != nomad.reservations
+
+        
