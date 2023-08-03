@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 const { OAuth2Client } = require('google-auth-library');
 const CLIENT_ID = '204812694051-91bud7uc0p6a450g7tllqj1hnk9iru0q.apps.googleusercontent.com';
 const CLIENT_SECRET = 'loIU7lsNAsxRP6-ABcEYK0GH';
-const REDIRECT_URI = 'http://localhost:3000/auth/callback';
+const REDIRECT_URI = 'http://nomadlink.onrender.com/auth/callback';
 const oAuth2Client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 
 app.locals.moment = require('moment');
