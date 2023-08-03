@@ -12,7 +12,7 @@ const api_key = process.env.API_KEY;
 
 const CLIENT_ID = '204812694051-91bud7uc0p6a450g7tllqj1hnk9iru0q.apps.googleusercontent.com';
 const CLIENT_SECRET = 'loIU7lsNAsxRP6-ABcEYK0GH';
-const REDIRECT_URI = 'http://localhost:3000/auth/callback';
+const REDIRECT_URI = 'http://nomadlink.onrender.com/auth/callback';
 
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1);
