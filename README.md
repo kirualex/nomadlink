@@ -1,6 +1,6 @@
 ## Nomadlink
 
-Source for Happy Hours [Nomadlink](https://nomadlink.glitch.me) interface
+Source for Happy Hours [Nomadlink](https://nomadlink.onrender.com) interface
 
 #### Getting started
 
@@ -12,5 +12,5 @@ $ nodemon
 
 #### Deployment
 
-This website is now deployed on Glitch (https://glitch.com)
+This website is now deployed on Render (https://render.com)
 Just push changes to the `master` branch to get them reflected in production.
