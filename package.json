@@ -30,6 +30,7 @@
     "url": ""
   },
   "devDependencies": {
-    "eslint": "^4.8.0"
+    "eslint": "^4.8.0",
+    "sync-glitch-cli": "^2.0.1"
   }
 }
